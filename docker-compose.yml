@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: support-ticket-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: support_tickets
+      POSTGRES_USER: support
+      POSTGRES_PASSWORD: change-me
+    ports:
+      - "5432:5432"
+    volumes:
+      - support_ticket_pgdata:/var/lib/postgresql/data
+      - ./postgres/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U support -d support_tickets"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  support_ticket_pgdata:

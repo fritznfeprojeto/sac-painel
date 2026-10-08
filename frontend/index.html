@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="description" content="Real-time Support Ticket Monitoring System">
+  <title>Support Desk</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <section id="login-view" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-lockup">
+        <div class="brand-mark">ST</div>
+        <div>
+          <strong>Support Desk</strong>
+          <span>Real-time ticket operations</span>
+        </div>
+      </div>
+      <h1>Sign in</h1>
+      <p class="muted">Use your registered Support or Salesperson credentials.</p>
+      <form id="login-form" class="stack-lg">
+        <label>Email<input name="email" type="email" autocomplete="username" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="btn btn-primary btn-block" type="submit">Enter workspace</button>
+      </form>
+      <p class="auth-foot">WebSocket live updates • PostgreSQL • RBAC</p>
+    </div>
+  </section>
+
+  <div id="app-view" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <div class="brand-mark small">ST</div>
+        <div><strong>Support Desk</strong><span>Operations</span></div>
+      </div>
+      <div id="sidebar-nav" class="sidebar-nav"></div>
+      <div class="sidebar-user">
+        <div class="avatar" id="user-avatar">U</div>
+        <div class="user-meta"><strong id="user-name">User</strong><span id="user-role">Role</span></div>
+        <button id="logout-btn" class="icon-btn" title="Sign out">↪</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow" id="page-eyebrow">WORKSPACE</div>
+          <h1 id="page-title">Tickets</h1>
+        </div>
+        <div class="topbar-actions">
+          <span id="live-indicator" class="live-indicator"><i></i> Connecting</span>
+          <button id="refresh-btn" class="btn btn-ghost">Refresh</button>
+        </div>
+      </header>
+      <div id="page-content" class="page-content"></div>
+    </main>
+  </div>
+
+  <dialog id="ticket-dialog" class="ticket-dialog">
+    <div class="dialog-head">
+      <div><div class="eyebrow">TICKET DETAIL</div><h2 id="dialog-title">Ticket</h2></div>
+      <button class="icon-btn" data-close-dialog>×</button>
+    </div>
+    <div id="dialog-body" class="dialog-body"></div>
+  </dialog>
+
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>
